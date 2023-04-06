@@ -1,0 +1,45 @@
+{"intents": [
+        {"tag": "greeting",
+         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
+         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+         "context_set": ""
+        },
+        {"tag": "goodbye",
+         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
+         "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"],
+         "context_set": ""
+        },
+        {"tag": "name",
+         "patterns": ["what is your name", "what should I call you", "whats your name?"],
+         "responses": ["You can call me Librarian, i will help you and making a dictionary"],
+         "context_set": ""
+        },
+        {"tag": "add",
+         "patterns": ["Can you add a word", "add", "I would like to add a word to the dictionary"],
+         "responses": ["Sure, i add a word what word would you like to add?"],
+         "context_set": ""
+        },
+        {"tag": "view",
+         "patterns": ["Can i view the dictionary", "can you list the words in the list", "can i view the list", "can you display the list", "view"],
+         "responses": ["Sure, here is a list of the current words."],
+         "context_set": ""
+        },
+        {"tag": "search",
+         "patterns": ["Can you find a word", "search a word for me", "search", "please search a word for me", "find"],
+         "responses": ["Sure, what word are you looking for."],
+         "context_set": ""
+        },
+        {"tag": "delete",
+         "patterns": ["Can you delete a word", "delete", "remove", "please remove a word for me"],
+         "responses": ["Sure, what word do you want to delete."],
+         "context_set": ""
+        },
+        {"tag": "how",
+         "patterns": ["how", "how do i use this?"],
+         "responses": ["You can ask me to add, delete, view and search words."],
+         "context_set": ""
+        }
+
+        
+   ]
+}

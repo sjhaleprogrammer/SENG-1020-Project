@@ -41,3 +41,6 @@ class LinkedList:
                 current_node.next = current_node.next.next
                 return
             current_node = current_node.next
+
+    def isEmpty(self):
+        return self.head is None
