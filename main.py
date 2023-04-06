@@ -29,13 +29,28 @@ model.eval()
 dictionary = LinkedList()
 bot_name = "Librarian"
 
+# Create a dictionary to cache the model's output for frequently asked questions
+model_output_cache = {}
+
+def get_model_output(X):
+    # Check if the output for this input is already in the cache
+    if str(X) in model_output_cache:
+        return model_output_cache[str(X)]
+
+    # Otherwise, run the model and cache the output
+    output = model(X)
+    _, predicted = torch.max(output, dim=1)
+    tag = tags[predicted.item()]
+    probs = torch.softmax(output, dim=1)
+    prob = probs[0][predicted.item()]
+    output_data = (tag, prob)
+    model_output_cache[str(X)] = output_data
+    return output_data
 
 def main():
-    
     print("Librarian: Hello and Welcome to the Dictionary Program, ask me anything.")
     print("")
     while True:
-    
         sentence = input("User: ")
         print("")
         if sentence == "quit":
@@ -46,17 +61,11 @@ def main():
         X = X.reshape(1, X.shape[0])
         X = torch.from_numpy(X).to(device)
 
-        output = model(X)
-        _, predicted = torch.max(output, dim=1)
+        tag, prob = get_model_output(X)
 
-        tag = tags[predicted.item()]
-
-        probs = torch.softmax(output, dim=1)
-        prob = probs[0][predicted.item()]
         if prob.item() > 0.75:
             for intent in intents['intents']:
                 if tag == intent["tag"]:
-        
                     if tag == "goodbye":
                         print(f"{bot_name}: {random.choice(intent['responses'])}")
                         exit()
@@ -71,7 +80,7 @@ def main():
                         dictionary.delete_word(word)
                     elif tag == "view":
                         if dictionary.isEmpty():
-                            print("Librarian: Sure but your dictionary is empty.")
+                            print("Librarian: Your dictionary currently empty.")
                         else:
                             print(f"{bot_name}: {random.choice(intent['responses'])}")
                             dictionary.display_words()
@@ -83,10 +92,8 @@ def main():
                             print(word + ": " + definition)
                         else:
                             print("Word not found")
-
                     else:
                         print(f"{bot_name}: {random.choice(intent['responses'])}")
-        
         else:
             print(f"{bot_name}: I do not understand, what did you say?")
 
@@ -95,8 +102,6 @@ def main():
         
 if __name__ == '__main__':
     main()
-
-
 
 
 
