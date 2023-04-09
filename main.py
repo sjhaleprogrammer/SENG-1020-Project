@@ -48,7 +48,7 @@ def get_model_output(X):
     return output_data
 
 def main():
-    print("Librarian: Hello and Welcome to the Dictionary Program, ask me anything.")
+    print("Librarian: Hello welcome to the dictionary program, ask me anything!!!!.")
     print("")
     while True:
         sentence = input("User: ")
