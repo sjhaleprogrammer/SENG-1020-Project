@@ -20,7 +20,7 @@
          "context_set": ""
         },
         {"tag": "view",
-         "patterns": ["Can i view the dictionary", "can you list the words in the list", "can i view the list", "can you display the list", "view"],
+         "patterns": ["Can i view the dictionary", "can you list the words in the list", "can i view the list", "can you display the list", "view","can i see the list"],
          "responses": ["Sure, here is a list of the current words."],
          "context_set": ""
         },
@@ -35,10 +35,12 @@
          "context_set": ""
         },
         {"tag": "how",
-         "patterns": ["how", "how do i use this?"],
+         "patterns": ["how", "how do i use this?", "what do i do"],
          "responses": ["You can ask me to add, delete, view and search words."],
          "context_set": ""
         }
+        
+
 
         
    ]

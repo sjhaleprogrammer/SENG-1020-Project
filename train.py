@@ -8,7 +8,6 @@ import json
 
 from torch.utils.data import Dataset, DataLoader
 
-from utils import bag_of_words, tokenize, stem
 from model import NeuralNet
 
 nltk.download('punkt')
@@ -33,7 +32,7 @@ for intent in intents['intents']:
     tags.append(tag)
     for pattern in intent['patterns']:
         # tokenize each word in the sentence
-        w = tokenize(pattern)
+        w = nltk.word_tokenize(pattern)
         # add to our words list
         all_words.extend(w)
         # add to xy pair
@@ -41,7 +40,7 @@ for intent in intents['intents']:
 
 # stem and lower each word
 ignore_words = ['?', '.', '!']
-all_words = [stem(w) for w in all_words if w not in ignore_words]
+all_words = [stemmer.stem(w.lower()) for w in all_words if w not in ignore_words]
 # remove duplicates and sort
 all_words = sorted(set(all_words))
 tags = sorted(set(tags))
@@ -55,7 +54,14 @@ X_train = []
 y_train = []
 for (pattern_sentence, tag) in xy:
     # X: bag of words for each pattern_sentence
-    bag = bag_of_words(pattern_sentence, all_words)
+
+    sentence_words = [stemmer.stem(word.lower()) for word in pattern_sentence]
+    # initialize bag with 0 for each word
+    bag = np.zeros(len(all_words), dtype=np.float32)
+    for idx, w in enumerate(all_words):
+        if w in sentence_words: 
+            bag[idx] = 1
+
     X_train.append(bag)
     # y: PyTorch CrossEntropyLoss needs only class labels, not one-hot
     label = tags.index(tag)
@@ -65,7 +71,7 @@ X_train = np.array(X_train)
 y_train = np.array(y_train)
 
 # Hyper-parameters 
-num_epochs = 1000
+num_epochs = 3000
 batch_size = 8
 learning_rate = 0.001
 input_size = len(X_train[0])
