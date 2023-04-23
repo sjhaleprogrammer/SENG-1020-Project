@@ -1,6 +1,6 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
+         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up", "Hey"],
          "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
          "context_set": ""
         },
@@ -37,6 +37,11 @@
         {"tag": "how",
          "patterns": ["how", "how do i use this?", "what do i do"],
          "responses": ["You can ask me to add, delete, view and search words."],
+         "context_set": ""
+        },
+        {"tag": "open",
+         "patterns": ["open", "load", "can i load a file","can i open a json"],
+         "responses": ["Sure what json do you want to open?"],
          "context_set": ""
         }
         

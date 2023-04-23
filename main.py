@@ -9,6 +9,7 @@ import json
 import torch
 import tkinter as tk
 import nltk
+import json
 
 
 stemmer = PorterStemmer()
@@ -53,6 +54,8 @@ def main():
     window.title("VocabAI")
     window.config(bg="#263238")
     
+
+
     chat_label = tk.Label(window, text="VocabAI", bg="#263238", fg="#FFF", font=("Arial", 16))
     chat_label.pack(pady=5)
     
@@ -180,7 +183,7 @@ def main():
                     elif tag == "search":
                         # create a new window for search
                         search_window = tk.Toplevel(window)
-                        search_window.title("Search")
+                        search_window.title("Search") 
                         search_window.config(bg="#263238")
                         search_window.resizable(False, False)
 
@@ -210,6 +213,17 @@ def main():
                         # create a search button
                         search_button = tk.Button(search_window, text="Search", font=("Arial", 14), command=search)
                         search_button.pack(pady=10)
+
+                    elif tag == "open":
+                        filename = tk.filedialog.askopenfilename(title="Open JSON File", filetypes=[("JSON Files", "*.json")])
+                        if filename:
+                            with open(filename, "r") as f:
+                                jsonfile = json.load(f)
+                            for word, definition in jsonfile.items():
+                                dictionary.add_word(word, definition)
+                            chatbox.insert(tk.END, "Dictionary loaded from file.\n")
+
+                           
                     else:
                         chatbox.insert(tk.END, response)
         else:
