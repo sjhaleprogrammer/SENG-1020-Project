@@ -50,7 +50,7 @@ def get_model_output(X):
 def main():
     window = tk.Tk()
     window.resizable(False, False)
-    window.geometry("800x600")
+    window.geometry("800x500")
     window.title("VocabAI")
     window.config(bg="#263238")
     
@@ -59,10 +59,10 @@ def main():
     chat_label = tk.Label(window, text="VocabAI", bg="#263238", fg="#FFF", font=("Arial", 16))
     chat_label.pack(pady=5)
     
-    chatbox = tk.Listbox(window, height=20, width=120, bg="#263238", fg="#FFF", font=("Arial", 12))
+    chatbox = tk.Listbox(window, height=20, width=120, bg="#263238", fg="#FFF", font=("Arial", 10))
     chatbox.pack(padx=10, pady=10)
 
-    greeting = "Librarian: Welcome to the dictionary program. You can add, remove, search, view, and edit word definitions. You can also load from a file.\n"
+    greeting = "Librarian: Welcome to VocabAI. You can add, remove, search, view, and edit word definitions. You can also load from a file.\n"
     chatbox.insert(tk.END, greeting)
 
     
