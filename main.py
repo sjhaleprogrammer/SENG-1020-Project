@@ -62,11 +62,8 @@ def main():
     chatbox = tk.Listbox(window, height=20, width=120, bg="#263238", fg="#FFF", font=("Arial", 12))
     chatbox.pack(padx=10, pady=10)
 
-    greeting = "Librarian: Hello welcome to the dictionary program, ask me to add new words, search for them, or view them.\n"
+    greeting = "Librarian: Welcome to the dictionary program. You can add, remove, search, view, and edit word definitions. You can also load from a file.\n"
     chatbox.insert(tk.END, greeting)
-    
-    
-    
 
     
     def send_message():
@@ -222,6 +219,7 @@ def main():
                             for word, definition in jsonfile.items():
                                 dictionary.add_word(word, definition)
                             chatbox.insert(tk.END, "Dictionary loaded from file.\n")
+
                     elif tag == "edit":
                         edit_window = tk.Toplevel(window)
                         edit_window.title("Edit Word")
@@ -274,8 +272,6 @@ def main():
                         # create an edit button
                         edit_button = tk.Button(edit_window, text="Edit", font=("Arial", 14), command=edit)
                         edit_button.pack(pady=10)
-
-
                            
                     else:
                         chatbox.insert(tk.END, response)
