@@ -5,10 +5,22 @@ import torch
 import torch.nn as nn
 import random
 import json
+import ssl
+
 
 from torch.utils.data import Dataset, DataLoader
 
 from model import NeuralNet
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+
+
 
 nltk.download('punkt')
 from nltk.stem.porter import PorterStemmer
