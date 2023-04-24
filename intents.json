@@ -43,10 +43,11 @@
          "patterns": ["open", "load", "can i load a file","can i open a json"],
          "responses": ["Sure what json do you want to open?"],
          "context_set": ""
+        },
+        {"tag": "edit",
+         "patterns": ["edit", "change", "can you edit a definition?","can I change a definition?"],
+         "responses": ["Sure, what definition would you like to edit?"],
+         "context_set": ""
         }
-        
-
-
-        
-   ]
+]
 }

@@ -47,3 +47,14 @@ class LinkedList:
 
     def isEmpty(self):
         return self.head is None
+
+    def edit_word(self, word, new_definition):
+        current = self.head
+
+        while current:
+            if current.word == word:
+                current.definition = new_definition
+                return True
+            current = current.next
+
+        return False

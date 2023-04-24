@@ -222,6 +222,59 @@ def main():
                             for word, definition in jsonfile.items():
                                 dictionary.add_word(word, definition)
                             chatbox.insert(tk.END, "Dictionary loaded from file.\n")
+                    elif tag == "edit":
+                        edit_window = tk.Toplevel(window)
+                        edit_window.title("Edit Word")
+                        edit_window.config(bg="#263238")
+
+                        # Create widgets for the edit window
+                        edit_label = tk.Label(edit_window, bg="#263238", fg="#FFF", text="Edit Word",
+                                              font=("Arial", 12))
+                        edit_label.pack(pady=10)
+
+                        search_label = tk.Label(edit_window, bg="#263238", fg="#FFF", text="Enter word to edit:",
+                                                font=("Arial", 10))
+                        search_label.pack(pady=5)
+
+                        search_entry = tk.Entry(edit_window, width=30, font=("Arial", 14))
+                        search_entry.pack(pady=5)
+
+                        current_label = tk.Label(edit_window, bg="#263238", fg="#FFF", text="", font=("Arial", 10))
+                        current_label.pack(pady=5)
+
+                        new_label = tk.Label(edit_window, bg="#263238", fg="#FFF", text="Enter new definition:",
+                                             font=("Arial", 10))
+                        new_label.pack(pady=5)
+
+                        new_entry = tk.Entry(edit_window, width=30, font=("Arial", 14))
+                        new_entry.pack(pady=5)
+
+                        result_label = tk.Label(edit_window, bg="#263238", fg="#FFF", text="", font=("Arial", 10))
+                        result_label.pack(pady=5)
+
+                        def edit():
+                            # get the search term and search for the word in the dictionary
+                            word = search_entry.get()
+                            definition = dictionary.search_word(word)
+
+                            # display the current definition in the edit window
+                            if definition is not None:
+                                current_label.config(text=f"The current definition for {word} is: {definition}")
+                            else:
+                                result_label.config(text="Word not found")
+                                return
+
+                            # get the new definition and update the dictionary
+                            new_definition = new_entry.get()
+                            dictionary.edit_word(word, new_definition)
+
+                            # display the result in the edit window
+                            result_label.config(text=f"The definition for {word} has been updated to: {new_definition}")
+
+                        # create an edit button
+                        edit_button = tk.Button(edit_window, text="Edit", font=("Arial", 14), command=edit)
+                        edit_button.pack(pady=10)
+
 
                            
                     else:
